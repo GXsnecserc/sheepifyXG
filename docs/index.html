@@ -30,6 +30,7 @@
       background-color: #fffbe6;
       border: 1px solid #ddd;
       min-height: 100px;
+      white-space: pre-wrap;
     }
   </style>
 </head>
@@ -43,77 +44,92 @@
   <script>
     function sheepify() {
       let text = document.getElementById("inputText").value;
+
       const replacements = [
-        [/\byou\b/gi, (m) => m === "You" ? "Ewe" : "ewe"],
-        [/\byour\b/gi, "ewe's"],
-        [/\bare\b/gi, "baa"],
-        [/\bhave\b/gi, "hoof"],
-        [/\blandslide\b/gi, "lambslide"],
-        [/\bunderstand\b/gi, "underlamb"],
-        [/\bsee\b/gi, "shear"],
-        [/\bno\b/gi, "naaah"],
-        [/\bknow\b/gi, "gnaw"],
-        [/\bamazing\b/gi, "a-baa-zing"],
-        [/\badorable\b/gi, "a-sheep-able"],
-        [/\bafraid\b/gi, "a-frayed"],
-        [/\bfriend\b/gi, "flockmate"],
-        [/\bfriends\b/gi, "flockmates"],
-        [/\bproblem\b/gi, "woollem"],
-        [/\bproblems\b/gi, "woollems"],
-        [/\bworld\b/gi, "woold"],
-        [/\bworlds\b/gi, "woolds"],
-        [/\bwhat\b/gi, "whaat"],
-        [/\bhello\b/gi, "baa-lo"],
-        [/\bokay\b/gi, "ewe-kay"],
-        [/\breally\b/gi, "re-ewe-lly"],
-        [/\bagree\b/gi, "a-bleat"],
-        [/\bplease\b/gi, "fleece"],
-        [/\blater\b/gi, "lamb-ter"],
-        [/\btime\b/gi, "thyme"],
-        [/\bme\b/gi, "meh-eh-eh"],
-        [/\bmine\b/gi, "baa-ne"],
-        [/\bparty\b/gi, "baaash"],
-        [/\bsurprise\b/gi, "surbaaahse"],
-        [/\blove\b/gi, "loooove ewe"],
-        [/\bloved\b/gi, "looooved"],
-        [/\bloves\b/gi, "looooves"],
-        [/\bsilly\b/gi, "sheepy"],
-        [/\bgenius\b/gi, "ewegeneous"],
-        [/\bcrazy\b/gi, "graaazy"],
-        [/\bstar\b/gi, "baa-star"],
-        [/\bstars\b/gi, "baa-stars"],
-        [/\bpanic\b/gi, "panbaaahnic"],
-        [/\bbaa\b/gi, "baaaah"],
-        [/\bnope\b/gi, "neigh-ewe"],
-        [/\bdance\b/gi, "prance"],
-        [/\bsoft\b/gi, "flufft"],
-        [/\bwarm\b/gi, "woolrm"],
-        [/\bcold\b/gi, "unwooly"],
-        [/\bfleece\b/gi, "fleeece"],
-        [/\bbaaah\b/gi, "baaaah"],
-        [/\bcute\b/gi, "cud-e"],
-        [/\badoring\b/gi, "a-flocking"],
-        [/\bhappy\b/gi, "woolly-jolly"],
-        [/\bsleepy\b/gi, "sheepy"],
-        [/\bdream\b/gi, "fleecy-thought"],
-        [/\bdreams\b/gi, "fleecy-thoughts"],
-        [/\bstory\b/gi, "baa-le"],
-        [/\bstories\b/gi, "baa-les"],
-        [/\bbrilliant\b/gi, "baa-rilliant"],
-        [/\bgood\b/gi, "wooly-good"],
-        [/\bbad\b/gi, "baaad"],
-        [/\bfamily\b/gi, "flock"],
-        [/\bfamilies\b/gi, "flocks"],
-        [/\bbored\b/gi, "boooored"],
-        [/aa/gi, "baa"],
-        [/ba/gi, "baa"]
+        [/\byou\b/gi, (m) => matchCase(m, "ewe")],
+        [/\byour\b/gi, (m) => matchCase(m, "ewe's")],
+        [/\bare\b/gi, (m) => matchCase(m, "baa")],
+        [/\bhave\b/gi, (m) => matchCase(m, "hoof")],
+        [/\blandslide\b/gi, (m) => matchCase(m, "lambslide")],
+        [/\bunderstand\b/gi, (m) => matchCase(m, "underlamb")],
+        [/\bsee\b/gi, (m) => matchCase(m, "shear")],
+        [/\bno\b/gi, (m) => matchCase(m, "naaah")],
+        [/\bknow\b/gi, (m) => matchCase(m, "gnaw")],
+        [/\bamazing\b/gi, (m) => matchCase(m, "a-baa-zing")],
+        [/\badorable\b/gi, (m) => matchCase(m, "a-sheep-able")],
+        [/\bafraid\b/gi, (m) => matchCase(m, "a-frayed")],
+        [/\bfriend\b/gi, (m) => matchCase(m, "flockmate")],
+        [/\bfriends\b/gi, (m) => matchCase(m, "flockmates")],
+        [/\bproblem\b/gi, (m) => matchCase(m, "woollem")],
+        [/\bproblems\b/gi, (m) => matchCase(m, "woollems")],
+        [/\bworld\b/gi, (m) => matchCase(m, "woold")],
+        [/\bworlds\b/gi, (m) => matchCase(m, "woolds")],
+        [/\bwhat\b/gi, (m) => matchCase(m, "whaat")],
+        [/\bhello\b/gi, (m) => matchCase(m, "baa-lo")],
+        [/\bokay\b/gi, (m) => matchCase(m, "ewe-kay")],
+        [/\breally\b/gi, (m) => matchCase(m, "re-ewe-lly")],
+        [/\bagree\b/gi, (m) => matchCase(m, "a-bleat")],
+        [/\bplease\b/gi, (m) => matchCase(m, "fleece")],
+        [/\blater\b/gi, (m) => matchCase(m, "lamb-ter")],
+        [/\btime\b/gi, (m) => matchCase(m, "thyme")],
+        [/\bme\b/gi, (m) => matchCase(m, "meh-eh-eh")],
+        [/\bmine\b/gi, (m) => matchCase(m, "baa-ne")],
+        [/\bparty\b/gi, (m) => matchCase(m, "baaash")],
+        [/\bsurprise\b/gi, (m) => matchCase(m, "surbaaahse")],
+        [/\blove\b/gi, (m) => matchCase(m, "loooove ewe")],
+        [/\bloved\b/gi, (m) => matchCase(m, "looooved")],
+        [/\bloves\b/gi, (m) => matchCase(m, "looooves")],
+        [/\bsilly\b/gi, (m) => matchCase(m, "sheepy")],
+        [/\bgenius\b/gi, (m) => matchCase(m, "ewegeneous")],
+        [/\bcrazy\b/gi, (m) => matchCase(m, "graaazy")],
+        [/\bstar\b/gi, (m) => matchCase(m, "baa-star")],
+        [/\bstars\b/gi, (m) => matchCase(m, "baa-stars")],
+        [/\bpanic\b/gi, (m) => matchCase(m, "panbaaahnic")],
+        [/\bbaa\b/gi, (m) => matchCase(m, "baaaah")],
+        [/\bnope\b/gi, (m) => matchCase(m, "neigh-ewe")],
+        [/\bdance\b/gi, (m) => matchCase(m, "prance")],
+        [/\bsoft\b/gi, (m) => matchCase(m, "flufft")],
+        [/\bwarm\b/gi, (m) => matchCase(m, "woolrm")],
+        [/\bcold\b/gi, (m) => matchCase(m, "unwooly")],
+        [/\bfleece\b/gi, (m) => matchCase(m, "fleeece")],
+        [/\bcute\b/gi, (m) => matchCase(m, "cud-e")],
+        [/\badoring\b/gi, (m) => matchCase(m, "a-flocking")],
+        [/\bhappy\b/gi, (m) => matchCase(m, "woolly-jolly")],
+        [/\bsleepy\b/gi, (m) => matchCase(m, "sheepy")],
+        [/\bdream\b/gi, (m) => matchCase(m, "fleecy-thought")],
+        [/\bdreams\b/gi, (m) => matchCase(m, "fleecy-thoughts")],
+        [/\bstory\b/gi, (m) => matchCase(m, "baa-le")],
+        [/\bstories\b/gi, (m) => matchCase(m, "baa-les")],
+        [/\bbrilliant\b/gi, (m) => matchCase(m, "baa-rilliant")],
+        [/\bgood\b/gi, (m) => matchCase(m, "wooly-good")],
+        [/\bbad\b/gi, (m) => matchCase(m, "baaad")],
+        [/\bfamily\b/gi, (m) => matchCase(m, "flock")],
+        [/\bfamilies\b/gi, (m) => matchCase(m, "flocks")],
+        [/\bbored\b/gi, (m) => matchCase(m, "boooored")],
+        [/\bcount sheep\b/gi, (m) => matchCase(m, "count sheep (the real deal)")],
+        [/\bwool you marry me\b/gi, (m) => matchCase(m, "wool ewe marry me")],
+        [/\bsheep happens\b/gi, (m) => matchCase(m, "sheep happens")],
+        [/\bwool over your eyes\b/gi, (m) => matchCase(m, "wool over ewe's eyes")],
+        [/\bkeep calm\b/gi, (m) => matchCase(m, "keep calm and count sheep")],
+        // Bonus partials and silly stretch replacements
+        [/aa/gi, (m) => m.toLowerCase() === "aa" ? "baa" : m],
+        [/ba/gi, (m) => m.toLowerCase() === "ba" ? "baa" : m]
       ];
 
-      replacements.forEach(([pattern, replacement]) => {
-        text = text.replace(pattern, replacement);
-      });
+      // Helper to match capitalization style of original match
+      function matchCase(text, replacement) {
+        if (text.toUpperCase() === text) return replacement.toUpperCase();
+        if (text[0].toUpperCase() === text[0]) {
+          return replacement.charAt(0).toUpperCase() + replacement.slice(1);
+        }
+        return replacement.toLowerCase();
+      }
 
-      document.getElementById("output").innerText = text;
+      for (const [pattern, replacer] of replacements) {
+        text = text.replace(pattern, replacer);
+      }
+
+      document.getElementById("output").textContent = text;
     }
   </script>
 </body>
