@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🐑 Sheepify Your Text!</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", sans-serif;
+      background-color: #fdf6f0;
+      color: #333;
+      padding: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #f4e04d;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .output {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #fffbe6;
+      border: 1px solid #ddd;
+      min-height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🐑 Sheepify Your Text!</h1>
+  <p>Enter your text below, and let the flock do its magic!</p>
+  <textarea id="inputText" placeholder="Write something wooly..."></textarea><br/>
+  <button onclick="sheepify()">Sheepify!</button>
+  <div class="output" id="output"></div>
+
+  <script>
+    function sheepify() {
+      let text = document.getElementById("inputText").value;
+      const replacements = [
+        [/\byou\b/gi, (m) => m === "You" ? "Ewe" : "ewe"],
+        [/\byour\b/gi, "ewe's"],
+        [/\bare\b/gi, "baa"],
+        [/\bhave\b/gi, "hoof"],
+        [/\blandslide\b/gi, "lambslide"],
+        [/\bunderstand\b/gi, "underlamb"],
+        [/\bsee\b/gi, "shear"],
+        [/\bno\b/gi, "naaah"],
+        [/\bknow\b/gi, "gnaw"],
+        [/\bamazing\b/gi, "a-baa-zing"],
+        [/\badorable\b/gi, "a-sheep-able"],
+        [/\bafraid\b/gi, "a-frayed"],
+        [/\bfriend\b/gi, "flockmate"],
+        [/\bproblem\b/gi, "woollem"],
+        [/\bworld\b/gi, "woold"],
+        [/\bwhat\b/gi, "whaat"],
+        [/\bhello\b/gi, "baa-lo"],
+        [/\bokay\b/gi, "ewe-kay"],
+        [/\breally\b/gi, "re-ewe-lly"],
+        [/\bagree\b/gi, "a-bleat"],
+        [/\bplease\b/gi, "fleece"],
+        [/\blater\b/gi, "lamb-ter"],
+        [/\btime\b/gi, "thyme"],
+        [/aa/gi, "baa"],
+        [/ba/gi, "baa"]
+      ];
+
+      replacements.forEach(([pattern, replacement]) => {
+        text = text.replace(pattern, replacement);
+      });
+
+      document.getElementById("output").innerText = text;
+    }
+  </script>
+</body>
+</html>
